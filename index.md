@@ -3,9 +3,8 @@
 
 ## Python
 
-* [Exercises](python/exercises/)
-* [Solutions](python/solutions/)
-* [Slides](python/slides/)
+* [Exercises](https://github.com/lacdr-tox/basic-programming-in-drug-discovery/tree/master/python/xercises/)
+* [Solutions](https://github.com/lacdr-tox/basic-programming-in-drug-discovery/tree/master/python/answers/)
 
 
 ## R
