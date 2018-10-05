@@ -1,4 +1,4 @@
-Compound_Name, Disease, Pain_rating, Concentration
+Compound_name, Disease, Pain_rating, Concentration
 Morphine, BRCA, 5, 10
 Morphine, BRCA, 5, 15
 Morphine, BRCA, 4, 20
