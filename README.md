@@ -11,6 +11,10 @@
 
 # Software
 
+# Requirements for server setup
+
+Each txt contains the libraries that are needed from the matching repository. So, if an extra requirement is needed, add this to the correct(!) file.
+
 ## Python - conda environment
 1. Create environment
 ```
