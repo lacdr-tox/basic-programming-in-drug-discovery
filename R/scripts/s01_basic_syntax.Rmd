@@ -1,20 +1,97 @@
 ---
-title: "R Notebook"
-output: html_notebook
-editor_options: 
-  chunk_output_type: inline
+title: "basic syntax"
+output: 
+  
+  html_notebook:
+    theme: united
+    toc: yes
+  html_document:
+    toc: yes
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+Note: to run the lines, select them or locate the cursor on a specific line and hold the `ctrl` key while typing `enter`  
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+### basic math operations    
 
+We can perform calculations on numerical objects
 ```{r}
-plot(cars)
+1 + 1
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+```{r}
+1 - 1
+```
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```{r}
+1 / 1
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r}
+1 * 1
+```
+
+### classes  
+
+To find out what class an object is you can use the `class()` function  
+```{r}
+class(1)
+```
+
+Another class is the so called `string` or `character` type,  
+you let R know you want to define a character class by using single or double quotes:  
+```{r}
+class("1")
+```
+
+* exercise: Run the line, why did you get an error?   
+Can you fix this error? 
+```{r}
+13 + "5"
+```
+
+The `+` is an example of a binary operator. Basically a function that can take 2 input arguments and return a single output.  
+However, we will look into functions later today. The `non-numeric` argument refers to the 5 not being numeric. It is called an `argument` because it is the input to the binary operator.  
+
+### objects for storing data  
+There are several objects in R that handle data storage. We will go through them one by one.   
+But first the concept of placeholders, also called identifiers, has to be explained.  
+
+You, as a programmer, are expected to create logical placeholder names. These names should be short, but still clarify what it is. Placeholders are used to store any object type. It is recommended to:  
+* seperate words with underscores: my_variable.  
+* use small letters  
+* for functions use verbs: join_tables()  
+
+As an example of a placeholder, let us define a variable that enables us to store a time-stamp:  
+```{r}
+current_time <- Sys.time()
+current_time  
+```
+Run the lines several times, see how the placeholder `current_time` stores the output of our `Sys.time()` function?  
+We can also store the output of a calculation:  
+
+```{r}
+my_result <- 5 * (1+5)
+my_result
+```
+And use this later on in our analysis, becuase it is stored in `R memory`! 
+```{r}
+my_result + 1
+```
+
+* exercise: explain and then fix the error message you get when running the following line of code: 
+```{r}
+my_other_result + 1  
+```
+
+
+
+
+#### vector
+A vector object is created with the `c()` command, each entry is seperated by a comma.  
+
+```{r}
+
+```
+
+### accessing and selection   
+
