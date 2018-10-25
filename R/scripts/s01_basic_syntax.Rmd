@@ -7,10 +7,13 @@ output:
     toc: yes
   html_document:
     toc: yes
+editor_options: 
+  chunk_output_type: inline
 ---
 
 Note: to run the lines, select them or locate the cursor on a specific line and hold the `ctrl` key while typing `enter`  
 
+## Basic math operations, classes and variables        
 ### basic math operations    
 
 We can perform calculations on numerical objects
@@ -46,13 +49,18 @@ class("1")
 * exercise: Run the line, why did you get an error?   
 Can you fix this error? 
 ```{r}
-13 + "5"
+13 + "5"  
 ```
 
 The `+` is an example of a binary operator. Basically a function that can take 2 input arguments and return a single output.  
 However, we will look into functions later today. The `non-numeric` argument refers to the 5 not being numeric. It is called an `argument` because it is the input to the binary operator.  
 
-### objects for storing data  
+Another important class in R is the `factor`. Factors allow ordering of descriptors/ nominal variables. Many R functions treat factors differently compared to the character class. It is important to be aware if your data is stored as character vs factor.  
+The default in R is to store all character data as factor. You can turn this default behaviour off with `options(stringsAsFactors = FALSE)`. When we look at the data object class `data.frames` we will have a look at some examples involving factors.  
+
+
+
+## data storage objects  
 There are several objects in R that handle data storage. We will go through them one by one.   
 But first the concept of placeholders, also called identifiers, has to be explained.  
 
@@ -61,6 +69,8 @@ You, as a programmer, are expected to create logical placeholder names. These na
 * use small letters  
 * for functions use verbs: join_tables()  
 
+
+### placeholders  
 As an example of a placeholder, let us define a variable that enables us to store a time-stamp:  
 ```{r}
 current_time <- Sys.time()
@@ -86,12 +96,107 @@ my_other_result + 1
 
 
 
-#### vector
-A vector object is created with the `c()` command, each entry is seperated by a comma.  
+### vectors
+A vector object is created with the `c()` command, each entry is seperated by a comma:  
+`my_vector <- c( 4, 6, 2, 4, 1)`   
 
+
+* exercise: Now that we know how to create vectors, how to create variables and strings/ characters lets practice this:  
+Create a vector with the `c()` function containing the sentence, "hello, my name is " in the first entry and in the second vector entry a placeholder containing your name.  Make sure to define the placeholder containing your name first, or you will get an error!   
 ```{r}
 
 ```
 
-### accessing and selection   
+
+Another way to create sequences of numbers is with the `seq()` function. Have a look at the help file for `seq' by typing
+?seq  
+Note the `from` `to` `by` and `length.out` arguments. To create a sequence of 6 equally spaced numbers from 0 to 10 you can dO:
+`my_seq <- seq(from = 0, to = 10, by = 2)` or you can do `my_seq <- seq(from = 0, to = 10, length.out = 6)` 
+Another usefull method to generate sequences of integers is the colon: `1:10`  
+
+* exercise: Try all three methods to generate a sequence of numbers from 12 to 2 with steps of 1. 
+```{r}
+
+```
+
+
+It is also possible to do calculations with numeric vectors. There is a bevaviour to be aware of called recycling. 
+* exercise: Calculate the sum of these vectors and explain recycling:  `1:6 + 1:2` also try `1:5` + `1:2`, when and why did you get a warning?   
+```{r}
+
+```
+
+Now let us move on to selection operations on vectors. Square brackets `[]` are used for selection. Selection by dimension (rows/columns/ or 3d) can be performed by seperating the arguments inside the brackets by comma's. A vector however, has only 1 dimension. To select the second entry of my_seq: `my_seq[2]` 
+exercise: Select entry 1, 3 and 5 of `my_seq`:  
+```{r}
+
+```
+
+### matrixes  
+Single class tables can be stored as matrixes. Matrixes are not so usefull for us biologists, but super usefull for fast matrix calculations in the for of linear algebra needed for the various statistical tools available in R.  We will have a quick look at them. To define a matrix:  
+```{r}
+my_matrix <- matrix(1:9, nrow = 3, ncol = 3)
+my_matrix
+my_matrix2 <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
+my_matrix2
+```
+Selection of matrix data is two dimensional, you need row and column identifiers,  
+to select row 2 and 3 of the 1st and 3rd columns:  
+
+```{r}
+my_matrix[2:3, c(1, 3)]  
+```
+
+
+The data.frame allows mixing data classes, so you can mix numerics, strings and factors.  
+
+
+### data.frames
+
+
+### lists  
+
+
+### arrays  
+
+
+
+
+## control flow and repetition  
+
+### conditionals
+
+### for loops
+
+### functional programming: apply family  
+
+
+## functions 
+
+
+## data reshaping and summarization  
+
+
+###
+###
+###
+
+
+
+## data visualization  
+
+### base plotting methods  
+
+method dispatch 
+
+
+### ggplot2 
+
+
+
+## read and write  
+
+
+
+## packages, CRAN & Bioconductor  
 
