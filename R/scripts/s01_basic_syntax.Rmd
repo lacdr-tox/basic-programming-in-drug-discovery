@@ -56,7 +56,7 @@ The `+` is an example of a binary operator. Basically a function that can take 2
 However, we will look into functions later today. The `non-numeric` argument refers to the 5 not being numeric. It is called an `argument` because it is the input to the binary operator.  
 
 Another important class in R is the `factor`. Factors allow ordering of descriptors/ nominal variables. Many R functions treat factors differently compared to the character class. It is important to be aware if your data is stored as character vs factor.  
-The default in R is to store all character data as factor. You can turn this default behaviour off with `options(stringsAsFactors = FALSE)`. When we look at the data object class `data.frames` we will have a look at some examples involving factors.  
+The default in R is to store all character data as factor. You can turn this default behavior off with `options(stringsAsFactors = FALSE)`. When we look at the data object class `data.frames` we will have a look at some examples involving factors.  
 
 
 
@@ -65,7 +65,7 @@ There are several objects in R that handle data storage. We will go through them
 But first the concept of placeholders, also called identifiers, has to be explained.  
 
 You, as a programmer, are expected to create logical placeholder names. These names should be short, but still clarify what it is. Placeholders are used to store any object type. It is recommended to:  
-* seperate words with underscores: my_variable.  
+* separate words with underscores: my_variable.  
 * use small letters  
 * for functions use verbs: join_tables()  
 
@@ -83,7 +83,7 @@ We can also store the output of a calculation:
 my_result <- 5 * (1+5)
 my_result
 ```
-And use this later on in our analysis, becuase it is stored in `R memory`! 
+And use this later on in our analysis, because it is stored in `R memory`! 
 ```{r}
 my_result + 1
 ```
@@ -97,7 +97,7 @@ my_other_result + 1
 
 
 ### vectors
-A vector object is created with the `c()` command, each entry is seperated by a comma:  
+A vector object is created with the `c()` command, each entry is separated by a comma:  
 `my_vector <- c( 4, 6, 2, 4, 1)`   
 
 
@@ -112,7 +112,7 @@ Another way to create sequences of numbers is with the `seq()` function. Have a 
 ?seq  
 Note the `from` `to` `by` and `length.out` arguments. To create a sequence of 6 equally spaced numbers from 0 to 10 you can dO:
 `my_seq <- seq(from = 0, to = 10, by = 2)` or you can do `my_seq <- seq(from = 0, to = 10, length.out = 6)` 
-Another usefull method to generate sequences of integers is the colon: `1:10`  
+Another useful method to generate sequences of integers is the colon: `1:10`  
 
 * exercise: Try all three methods to generate a sequence of numbers from 12 to 2 with steps of 1. 
 ```{r}
@@ -120,38 +120,69 @@ Another usefull method to generate sequences of integers is the colon: `1:10`
 ```
 
 
-It is also possible to do calculations with numeric vectors. There is a bevaviour to be aware of called recycling. 
+It is also possible to do calculations with numeric vectors. There is a behavior to be aware of called recycling. 
 * exercise: Calculate the sum of these vectors and explain recycling:  `1:6 + 1:2` also try `1:5` + `1:2`, when and why did you get a warning?   
 ```{r}
 
 ```
 
-Now let us move on to selection operations on vectors. Square brackets `[]` are used for selection. Selection by dimension (rows/columns/ or 3d) can be performed by seperating the arguments inside the brackets by comma's. A vector however, has only 1 dimension. To select the second entry of my_seq: `my_seq[2]` 
+Now let us move on to selection operations on vectors. Square brackets `[]` are used for selection. Selection by dimension (rows/columns/ or 3d) can be performed by separating the arguments inside the brackets by comma's. A vector however, has only 1 dimension. To select the second entry of my_seq: `my_seq[2]` 
 exercise: Select entry 1, 3 and 5 of `my_seq`:  
 ```{r}
 
 ```
 
 ### matrixes  
-Single class tables can be stored as matrixes. Matrixes are not so usefull for us biologists, but super usefull for fast matrix calculations in the for of linear algebra needed for the various statistical tools available in R.  We will have a quick look at them. To define a matrix:  
+Single class tables can be stored as matrices. Matrices are not so useful for us biologists, but super useful for fast matrix calculations in the for of linear algebra needed for the various statistical tools available in R.  We will have a quick look at them. To define a matrix:  
 ```{r}
 my_matrix <- matrix(1:9, nrow = 3, ncol = 3)
 my_matrix
 my_matrix2 <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
 my_matrix2
 ```
-Selection of matrix data is two dimensional, you need row and column identifiers,  
-to select row 2 and 3 of the 1st and 3rd columns:  
+Selection of matrix data is two dimensional, you need row and column identifiers, selection occurs like this: 
+`my_matrix[`*row-numbers*`,` *column-numbers*`]` to select row 2 and 3 of the 1st and 3rd columns:  
 
 ```{r}
 my_matrix[2:3, c(1, 3)]  
 ```
 
 
-The data.frame allows mixing data classes, so you can mix numerics, strings and factors.  
+### data.frames  
+The data.frame allows mixing data classes, so you can mix numeric, strings and factors. Let's have a look at the already available `iris` data.frame using the `head` function to display only the first 7 rows.   
+```{r}
+head(iris, n = 7)
+```
+
+The column classes are already displayed under the column names (if you have a recent version of R Studio installed). An alternative to inspect the column classes is to check them manually, for column one and five this would be:  
+```{r}
+class(iris[, 1])
+class(iris[, 5])
+```
+This mixing of data types is not possible in matrices.  
+Before we dive deeper into `data.frames`, we will discuss the `factor` class. Let us print the contents of the `Species` column from the `iris` `data.frame`:  
+```{r}
+iris[, 5]
+```
+Note the `Levels` at the bottom? This informs us this column has the class `factor`, and also informs us of the unique factor levels. This is mainly important for statistical analysis, where defining the order is important. However many functions and visualization tools in R also use the factor data type to define for example the order of displaying data labels or the order of plotting nominal values on the x-axis.  
+You can create the `factor` class with (first we transform the `Species` to character class): 
+```{r}
+iris$Species <- as.character(iris$Species)
+iris$Species
+iris$Species <- factor(iris$Species)
+iris$Species
+```
+ Always think of `data.frames` in a column-wise fashion. A column represents a variable. Next to `iris[, 5]` We can aces `data.frame` columns with `iris$Species` or `iris[, "Species"]`  
+
+This is an opportune moment to explain boolean and conditional selection.  
+ 
+ *exercise: Display the `Petal.Length` for all plants that belong to the virginica Species.  
+```{r}
+
+```
 
 
-### data.frames
+
 
 
 ### lists  
@@ -159,6 +190,8 @@ The data.frame allows mixing data classes, so you can mix numerics, strings and 
 
 ### arrays  
 
+
+ 
 
 
 
