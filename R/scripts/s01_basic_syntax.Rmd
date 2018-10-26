@@ -174,18 +174,37 @@ iris$Species
 ```
  Always think of `data.frames` in a column-wise fashion. A column represents a variable. Next to `iris[, 5]` We can aces `data.frame` columns with `iris$Species` or `iris[, "Species"]`  
 
-This is an opportune moment to explain boolean and conditional selection. The boolean class, in R called the logical class, is another class of data. It has the values `TRUE`, `FALSE` and `NA`  
+This is an opportune moment to explain boolean and conditional selection. The boolean class, in R called the logical class, is another class of data. It has the values `TRUE`, `FALSE` and `NA`. The `NA` is used if the entry does not exist.  
+With logicals it is possible to perform selection. For example;  
+`iris[ iris$Petal.Length < 1.4,  ]` displayes all rows of the `iris` data for which the Petal Length is smaller than 1.4.  
+printing the `iris$Petal.Length < 1.4` statement clearly shows what is happening.  
+```{r}
+iris$Petal.Length < 1.4
+```
+It is possible to perform multiple conditional selections by using the `&` sign inbetween.  
 
-
- 
- *exercise: Display the `Petal.Length` for all plants that belong to the virginica Species.  
+* exercise: Display the `Petal.Length` for all plants that belong to the virginica Species.  
 ```{r}
 
 ```
 
 
+* exercise: Display the `Petal.Length` for all plants that belong to the virginica species for which the petal length is smaller than 1.6.    
+```{r}
 
+```
 
+Finally, we will have a quick look how we can perform calculations with data frames. To define a new variable (thus column) in your data frame you can use direct assignment to a new variable: `iris$is_small_Sepal <- iris$Sepal.Length < 5 | iris$Sepal.Width < 3`   
+Now note that you can do calculations on booleans
+```{r}
+sum(c(TRUE, TRUE, FALSE, FALSE, TRUE))
+```
+* exercise: how many small sepal plants are there for each of the three species? With small as defined above.  
+```{r}
+
+```
+
+Note how we used mutliple columns in a `data.frame` to calculate a new column and that these operations are performed row-wise, thus for each plant!  
 
 ### lists  
 
