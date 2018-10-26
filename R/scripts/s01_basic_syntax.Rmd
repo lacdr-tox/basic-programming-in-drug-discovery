@@ -174,7 +174,9 @@ iris$Species
 ```
  Always think of `data.frames` in a column-wise fashion. A column represents a variable. Next to `iris[, 5]` We can aces `data.frame` columns with `iris$Species` or `iris[, "Species"]`  
 
-This is an opportune moment to explain boolean and conditional selection.  
+This is an opportune moment to explain boolean and conditional selection. The boolean class, in R called the logical class, is another class of data. It has the values `TRUE`, `FALSE` and `NA`  
+
+
  
  *exercise: Display the `Petal.Length` for all plants that belong to the virginica Species.  
 ```{r}
