@@ -110,7 +110,7 @@ Create a vector with the `c()` function containing the sentence, "hello, my name
 
 Another way to create sequences of numbers is with the `seq()` function. Have a look at the help file for `seq' by typing
 ?seq  
-Note the `from` `to` `by` and `length.out` arguments. To create a sequence of 6 equally spaced numbers from 0 to 10 you can dO:
+Note the `from` `to` `by` and `length.out` arguments. To create a sequence of 6 equally spaced numbers from 0 to 10 you can do:
 `my_seq <- seq(from = 0, to = 10, by = 2)` or you can do `my_seq <- seq(from = 0, to = 10, length.out = 6)` 
 Another useful method to generate sequences of integers is the colon: `1:10`  
 
@@ -153,6 +153,15 @@ The data.frame allows mixing data classes, so you can mix numeric, strings and f
 ```{r}
 head(iris, n = 7)
 ```
+To define your own data frame use the `data.frame()` function:  
+```{r}
+my_dataframe <- data.frame(names = c("Steven", "Margriet", "Gerard", "Elke"),
+                           hobbies = c("R", "Python", "cheminformatics", "pharmacokinetics"),
+                           sex = c("M", "F", "M", "F"),
+                           fakeage = c(38, 30, 34, 28))
+my_dataframe
+```
+
 
 The column classes are already displayed under the column names (if you have a recent version of R Studio installed). An alternative to inspect the column classes is to check them manually, for column one and five this would be:  
 ```{r}
@@ -174,14 +183,14 @@ iris$Species
 ```
  Always think of `data.frames` in a column-wise fashion. A column represents a variable. Next to `iris[, 5]` We can aces `data.frame` columns with `iris$Species` or `iris[, "Species"]`  
 
-This is an opportune moment to explain boolean and conditional selection. The boolean class, in R called the logical class, is another class of data. It has the values `TRUE`, `FALSE` and `NA`. The `NA` is used if the entry does not exist.  
+This is an opportune moment to explain Boolean and conditional selection. The Boolean class, in R called the logical class, is another class of data. It has the values `TRUE`, `FALSE` and `NA`. The `NA` is used if the entry does not exist.  
 With logicals it is possible to perform selection. For example;  
-`iris[ iris$Petal.Length < 1.4,  ]` displayes all rows of the `iris` data for which the Petal Length is smaller than 1.4.  
+`iris[ iris$Petal.Length < 1.4,  ]` displays all rows of the `iris` data for which the Petal Length is smaller than 1.4.  
 printing the `iris$Petal.Length < 1.4` statement clearly shows what is happening.  
 ```{r}
 iris$Petal.Length < 1.4
 ```
-It is possible to perform multiple conditional selections by using the `&` sign inbetween.  
+It is possible to perform multiple conditional selections by using the `&` sign in between.  
 
 * exercise: Display the `Petal.Length` for all plants that belong to the virginica Species.  
 ```{r}
@@ -195,7 +204,7 @@ It is possible to perform multiple conditional selections by using the `&` sign 
 ```
 
 Finally, we will have a quick look how we can perform calculations with data frames. To define a new variable (thus column) in your data frame you can use direct assignment to a new variable: `iris$is_small_Sepal <- iris$Sepal.Length < 5 | iris$Sepal.Width < 3`   
-Now note that you can do calculations on booleans
+Now note that you can do calculations on Boolean
 ```{r}
 sum(c(TRUE, TRUE, FALSE, FALSE, TRUE))
 ```
@@ -204,23 +213,137 @@ sum(c(TRUE, TRUE, FALSE, FALSE, TRUE))
 
 ```
 
-Note how we used mutliple columns in a `data.frame` to calculate a new column and that these operations are performed row-wise, thus for each plant!  
+Note how we used multiple columns in a `data.frame` to calculate a new column and that these operations are performed row-wise, thus for each plant!  
 
 ### lists  
 
+Lists are another object class in R to store data. Actually any object can be stored in lists, for example functions, data frames, vectors, characters and even other lists can all be placed in a list. If you put 1 object in a list, the list has length 1, putting 2 objects in the list creates a list of length 2, and so on. You can name the entries in the list making access easy and explicit. Let's create a list with named entries:  
+```{r}
+my_list <- list(teachers = my_dataframe, stat = t.test( 
+  subset(iris, Species == "virginica")[, "Sepal.Length"], subset(iris, Species == "setosa")[, "Sepal.Length"]) )
+
+my_list
+
+```
+
+To access an entry in our list there are several options. One can use the name:  
+```{r}
+my_list$teachers
+my_list$stat
+```
+Or simply index numbers:  
+```{r}
+my_list[[1]]
+```
+If you want to keep the list attributes use a single bracket:  
+```{r}
+my_list[1]
+```
+To select multiple slots simultaneously use single brackets:  
+```{r}
+my_list[1:2]
+```
+
+Accessing objects inside lists is also straightforward, access the list entry and then treat the object selections as you would normally:  
+```{r}
+my_list$teachers$hobbies
+```
+Or you could do:  
+```{r}
+my_list[[1]][, "hobbies"]
+```
+
+* exercise: Store the iris data frame as and additional slot in the existing list object `my_list`  
+```{r}
+
+```
+
+* exercise: Display the `Sepal.Lengths` of all `virginca` and `setosa` plants from within the `my_list`  
+```{r}
+
+```
+
+
+
+To conclude, lists are a usefull addition to data frames because they are more flexible.  
+
 
 ### arrays  
+Arrays are higher dimensional  matrixes. For example, a three dimensional array can be thought of as multiple matrixes stacked behind one another, for 4 3x3 matrixes:    
+```{r}
+my_array <- array(1:28, dim = c(3, 3, 4))
+dim(my_array)
+my_array
+```
 
+To access 2nd row, 2nd column of 2nd matrix: [row, column, extra_dimension1]  
+```{r}
+my_array[ 2, 2, 2 ]
+```
+Or to access the 3rd matrix:  
+```{r}
+my_array[ , , 3]
+```
 
- 
+But you could also give the matrices themselves indexes in multiple dimensions, for example:  
+```{r}
+my_array <- array(1:28, dim = c(3, 3, 2, 2 ))
+dim(my_array)
+my_array
+```
 
 
 
 ## control flow and repetition  
+Next to one time diving into data for analysis, it is often useful to create automated workflows, your own packages or even pieces of software. In these cases it is useful to learn a little bit more than loading and accessing data, so we will dive into a bit more advanced programming tools, such as control flow and repetition. These concepts are often also useful even for interactive data analysis.  
 
 ### conditionals
 
+Conditionals make your program perform an action depending on the input. To do this the `if else` syntax is used. 
+The basic syntax is:  `if(TRUE) { do this }`  
+For example;  
+```{r}
+sepal_size <- 6
+if( sepal_size < 5 ) { # note the opening curly braces  
+  sepal_class <- "small"
+} # note the matching closing curly braces  
+```
+
+* exercise: run the lines above, what is sepal_class now? Does it exist? Why (not)?  
+
+So the `if` statement above was evaluated as `FALSE` and the lines between the curly braces were skipped. Would'nt it be nice to define sepal_class as `large` without creating another separate `if` statement? Rejoice, we can!  
+
+```{r}
+sepal_size <- 6
+if( sepal_size < 5 ) { 
+  sepal_class <- "small"
+} else {
+  sepal_class <- "large"
+}
+```
+
+
+It is even possible to create as many `else if` conditionals as you like:  
+```{r}
+sepal_size <- 6
+if( sepal_size < 5 ) { 
+  sepal_class <- "small"
+} else if( sepal_size > 8) {
+  sepal_class <- "large"
+} else {
+  sepal_class <- "medium"
+}
+```
+* exercise: without running the code above, what does `sepal_class` evaluate to?  
+
+* exercise: modify the example above to include another interval between 5 and 6 that evaluates to `medium-small`  
+
 ### for loops
+Coding would be alot less useful if we could not be able to repeat operations easily. For repetition R uses the following loop syntax: `for(i in 1:10)`{ code to repeat in here }.  The `i` can be anything, and the number of repetitions can be to your choosing as well. In this example we perform 10 repetitions with the sequence of numbers from 1 to 10. Take note the variable `i` will evaluate to each of these numbers in the sequence. This is usefull for indexing as will become clear in the following example:  
+```{r}
+
+```
+
 
 ### functional programming: apply family  
 
