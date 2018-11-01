@@ -588,7 +588,7 @@ Hopefully you noticed that if you want to specify some arguments to the function
 
 The remainder of the course will be about data formatting, summarization and visualization. It is entirely possible to do these things using base R. However in recent years better alternatives have been developed. Now that the basic R syntax has been explained, it is time to introduce a more consistent and easier to read syntax created by Hadley Wickham in the form of key packages `dplyr`, `tidyr` and `ggplot2`. Most operations can be performed with `dplyr` and `tidyr`, and `ggplot2` can handle most visualizations. It is however still necessary to know the basic R syntax - especially for more compolicated and specific statistical analysis for which many methods exist. We will explain method (dispatch) in the visualization paragraph.         
 
-Let's first install and load the packages:  
+First install and load the packages:  
 ```{r}
 install.packages(c("dplyr", "tidyr", "ggplot2"))
 library(dplyr)
@@ -597,9 +597,14 @@ library(ggplot2)
 
 ```
 
+## tidyr & dplyr syntax
+
+
 
 ## data reshaping and summarization  
 
+?`%>%`
+gebruik ICT slide materiaal.
 
 ###
 ###
