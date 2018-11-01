@@ -1,1 +1,7 @@
 r-devtools
+r-dplyr
+r-tidyr
+r-tibble
+r-ggplot2
+r-pracma
+r-reshape2
