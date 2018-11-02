@@ -203,6 +203,13 @@ It is possible to perform multiple conditional selections by using the `&` sign 
 
 ```
 
+A very usefull operator for selection to multiple entries is the `%in%` operator:  
+```{r}
+iris[ iris$Species %in% c("virginica", "setosa")  & iris$Sepal.Length %in% c( 7.2, 5.3),]
+```
+
+
+
 Finally, we will have a quick look how we can perform calculations with data frames. To define a new variable (thus column) in your data frame you can use direct assignment to a new variable: `iris$is_small_Sepal <- iris$Sepal.Length < 5 | iris$Sepal.Width < 3`   
 Now note that you can do calculations on Boolean
 ```{r}
@@ -475,7 +482,7 @@ Now try to make a call to `trapz`.
 Indeed, "object `trapz` not found".  
 If you do not want to code a trapezium based function to calculate the area under a curve yourself, you can google or search CRAN for a package that someone already wrote to do this. For example the `pracma`  package will do this for you. Install the package:
 ```{r}
-install.packages("pracma")
+#install.packages("pracma")
 ```
 After installing the package, the package will be located in your local `library` folder. Which you can find by typing `.libPaths()`  
 
@@ -590,7 +597,7 @@ The remainder of the course will be about data formatting, summarization and vis
 
 First install and load the packages:  
 ```{r}
-install.packages(c("dplyr", "tidyr", "ggplot2"))
+#install.packages(c("dplyr", "tidyr", "ggplot2"))
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -599,12 +606,122 @@ library(ggplot2)
 
 ## tidyr & dplyr syntax
 
+Advantages:  
+** Piping `%>%` more readable: data flow operator from left to right    
+** Tibble, nicer implementation of data.frame  
+** Consistent language: `filter`, `select`, `mutate`,  `summarise` and `arrange`  
+** Explicit function names (function names do what they say)  
+
+Overvieuw:  
+row selection:  `filter(iris, Sepal.Length >6)`  
+column selection: `select(iris, Species : Petal.Length)`  
+Calculations: `mutate(iris, Petal.Ratio = Petal.Width / Petal.Length)`  
+Define annotation: `group_by(iris, Species)` For summarizing or joining tables  
+Summarize based on group annotation: `summarise(iris, n = n(), mean.Petal.Ratio = mean(Petal.Ratio))` 
+Row order the table: `arrange(iris, desc(mean.Petal.Ratio))` 
+Merging tables based on a shared column id: `left_join()`, `full_join()` 
+
+For example, using the dplyr syntax on `my_dataframe`:  
+```{r}
+my_dataframe %>% filter( names %in% c("Margriet", "Elke") ) %>%
+  select(names:hobbies) # select columns from names to hobbies
+```
+To perform calculations on a dataframe and perform a statistical summary:  
+```{r}
+my_dataframe %>% 
+  mutate(nonsensicle_confidence_limits = 1.97*sd(fakeage)/sqrt(3)) %>%
+  group_by(sex) %>%
+  summarize(n = n(), total_age = sum(fakeage), CoV = sd(fakeage)/total_age )
+    
+```
+In the example above the `mutate` call calculates the confidence limits and adds it as a new column.  
+The `group_by` call is needed to group the dataframe by sex, so that R knows over what levels to summarise over in the next line. The `n = n()` gives us the number of rows summarised over, then two more calculations are performed as extra arguments to the `summarise` call; the sum of the age of the males/females, and the coefficient of variation.  
 
 
-## data reshaping and summarization  
+* exercise: After observing the following code, rewrite it with pipes and `dplyr` syntax: 
+hint: run line by line and observe the result, some functions like `aggregate` have not been treated but by looking at the result will make its function it obvious.  
+```{r}
+tmp <- iris[ iris$Sepal.Length > 6, ]
+tmp <- tmp[, c("Species", "Petal.Width", "Petal.Length")]
+tmp$Petal.Ratio <- tmp$Petal.Width / tmp$Petal.Length
+tmp2 <- aggregate(Petal.Ratio ~ Species, data = tmp, FUN = length)
+tmp <- aggregate(Petal.Ratio ~ Species, data = tmp, FUN = mean)
+colnames(tmp)[2] <- "mean.Petal.Ratio"
+colnames(tmp2)[2] <- "n"
+tmp <- merge(tmp2, tmp, by = "Species")
+tmp[ rev(order(tmp$mean.Petal.Ratio)), ]
+```
 
-?`%>%`
-gebruik ICT slide materiaal.
+```{r}
+
+```
+
+## data reshaping, summarization and merging  
+
+Data reshaping, summarization and merging are fundamental data analysis operations. There are a multitude of ways this can be done in R, this can make R very confusing. For this reason we will stick to the `dplyr/tidyr` syntax.   
+To explain these concepts and to demonstrate use-cases, we will perform a small case study.  
+Carefully run the lines and make sure to understand each part.  
+
+Observe the `iris` dataset:
+```{r}
+head(iris)
+```
+
+Our goal is to calculate the average sepal and petal lengths and widths and add it to the existing iris table. Let us do this now, we first define the groups, then calculate the mean and finally add the result of this calculation to the iris table:    
+
+```{r}
+
+mean_iris <- iris %>% group_by(Species) %>%
+  summarise_all(mean) 
+  
+iris <- left_join(iris, mean_iris, by = "Species", suffix = c( "", ".mean") )
+head(iris)
+
+```
+So for each measure- column we have to create an extra column to store the mean. A better way would be to first `gather` the measure-columns into a single column:  
+
+```{r}
+# first reload iris:
+data(iris)
+head(iris)
+iris %>% gather(key = variable, value = value , -Species)
+
+```
+Basicly: `gather(data, key = "new name of combined columns", value = "new name of value column", -name of columns not to gather in key column)`
+Or you could specify the columns to gather: 
+```{r}
+iris %>% gather(key = variable, value = value,
+       Sepal.Length, Sepal.Width, Petal.Length, Petal.Width)
+```
+
+Now let's use what we have learned to streamline our case study objective:  
+```{r}
+iris %>% gather(key = variable, value = value , -Species) %>% 
+  group_by(Species) %>% 
+  mutate(mean_value = mean(value))
+```
+Then there is also `spread`, which creates the wider format of data:  
+
+```{r}
+iris <- iris %>% mutate(id = 1:nrow(iris)) # add id so we can go from long format back to wide format
+iris_long <- iris %>% gather(key = variable, value = value , -(Species:id)) 
+iris_wide <- iris_long %>% spread( key = variable, value = value )
+```
+basically: `spread(longdata, key = name of column to spread, name of value column)` 
+
+
+* exercise: start with the iris data, go to long format with `gather` then back to the original format, but now without using the `id` column. You can reload/ clean the iris data with `data(iris)`  Did this work? Why (not)? What does the `id` represent?  
+
+```{r}
+
+```
+
+
+
+* exercise
+
+
+
 
 ###
 ###
@@ -616,14 +733,16 @@ gebruik ICT slide materiaal.
 
 ### base plotting methods  
 
-method dispatch 
+method dispatch   
 
 
-### ggplot2 
+### ggplot2   
+
+melt case  
 
 
 
-## read and write  
+## read and write functions   
 
 
 
