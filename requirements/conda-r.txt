@@ -1,6 +1,1 @@
-r-devtools
-r-dplyr
-r-tidyr
-r-tibble
-r-ggplot2
-r-reshape2
+# NOT USED ANYMORE!

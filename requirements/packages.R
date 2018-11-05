@@ -1,0 +1,7 @@
+install.packages("pracma", lib="/tmp/R/", repos='http://cloud.r-project.org/')
+install.packages("devtools", lib="/tmp/R/", repos='http://cloud.r-project.org/')
+install.packages("dplyr", lib="/tmp/R/", repos='http://cloud.r-project.org/')
+install.packages("tidyr", lib="/tmp/R/", repos='http://cloud.r-project.org/')
+install.packages("tibble", lib="/tmp/R/", repos='http://cloud.r-project.org/')
+install.packages("ggplot2", lib="/tmp/R/", repos='http://cloud.r-project.org/')
+install.packages("reshape2", lib="/tmp/R/", repos='http://cloud.r-project.org/')

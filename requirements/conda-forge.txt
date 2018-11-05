@@ -2,3 +2,4 @@ matplotlib
 numpy
 pandas
 r-pracma
+seaborn=0.9.0
