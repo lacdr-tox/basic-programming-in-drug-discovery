@@ -203,7 +203,7 @@ It is possible to perform multiple conditional selections by using the `&` sign 
 
 ```
 
-A very usefull operator for selection to multiple entries is the `%in%` operator:  
+A very useful operator for selection to multiple entries is the `%in%` operator:  
 ```{r}
 iris[ iris$Species %in% c("virginica", "setosa")  & iris$Sepal.Length %in% c( 7.2, 5.3),]
 ```
@@ -276,11 +276,11 @@ my_list[[1]][, "hobbies"]
 
 
 
-To conclude, lists are a usefull addition to data frames because they are more flexible.  
+To conclude, lists are a useful addition to data frames because they are more flexible.  
 
 
 ### arrays  
-Arrays are higher dimensional  matrixes. For example, a three dimensional array can be thought of as multiple matrixes stacked behind one another, for 4 3x3 matrixes:    
+Arrays are higher dimensional  matrices. For example, a three dimensional array can be thought of as multiple matrices stacked behind one another, for 4 3x3 matrices:    
 ```{r}
 my_array <- array(1:28, dim = c(3, 3, 4))
 dim(my_array)
@@ -322,7 +322,7 @@ if( sepal_size < 5 ) { # note the opening curly braces
 
 * exercise: run the lines above, what is sepal_class now? Does it exist? Why (not)?  
 
-So the `if` statement above was evaluated as `FALSE` and the lines between the curly braces were skipped. Would'nt it be nice to define sepal_class as `large` without creating another separate `if` statement? Rejoice, we can!  
+So the `if` statement above was evaluated as `FALSE` and the lines between the curly braces were skipped. Wouldn't it be nice to define sepal_class as `large` without creating another separate `if` statement? Rejoice, we can!  
 
 ```{r}
 sepal_size <- 6
@@ -350,7 +350,7 @@ if( sepal_size < 5 ) {
 * exercise: modify the example above to include another interval between 5 and 6 that evaluates to `medium-small`  
 
 ### for loops
-Coding would be alot less useful if we would not be able to repeat operations easily. For repetition R uses the following loop syntax: `for(i in 1:10)`{ code to repeat in here }.  The `i` can be any made up placeholder name, and the number of repetitions can be to your choosing as well. In this example we perform 10 repetitions with the sequence of numbers from 1 to 10. Take note the variable `i` will evaluate to each of these numbers in the sequence. This is usefull for indexing as will become clear in the following example:  
+Coding would be a lot less useful if we would not be able to repeat operations easily. For repetition R uses the following loop syntax: `for(i in 1:10)`{ code to repeat in here }.  The `i` can be any made up placeholder name, and the number of repetitions can be to your choosing as well. In this example we perform 10 repetitions with the sequence of numbers from 1 to 10. Take note the variable `i` will evaluate to each of these numbers in the sequence. This is useful for indexing as will become clear in the following example:  
 ```{r}
 for(i in 1:5) {
   print(paste0("is is: ", i))
@@ -388,8 +388,8 @@ if(gender == "M"){
 ** you start with 5 euro.  
 ** you loose when you have 0 or less euro.  
 ** you have to guess how the dice will fall. 
-** if you gues correct you win 3 euro  
-** if you gues incorrect you loose 1 euro  
+** if you guess correct you win 3 euro  
+** if you guess incorrect you loose 1 euro  
 ** use a loop to play 5 times, you will ask for user input 5 times  
 ** at each iteration inform the player how much money is left    
 Hints:
@@ -431,7 +431,7 @@ while(my_money > 0 | my_money < 10 ) {
 
 ## functions 
 
-We have come acros many functions already. It is good to be aware of the origin of functions. R has a system to look for functions in different environments, this is to ensure identical function names from different packages do not interfere with one another.  
+We have come across many functions already. It is good to be aware of the origin of functions. R has a system to look for functions in different environments, this is to ensure identical function names from different packages do not interfere with one another.  
 The base R functions, like `mean`, `sample`, `print`  etc come with every installation of R.  
 Functions created by package developers become available after loading a package.  
 User defined packages are created by the user during a R session. 
@@ -472,15 +472,15 @@ We will have to delve into environments first before we can continue with functi
 
 ### packages & environments & namespaces 
 
-In R it is relatively straightforward to create you own package. If accepted by the maintainers of CRAN, the repository for R packages, it will become available for anyone by a simple call to the `install.packages()` function! But you can also put your package or scripts on GitHub, and make it available that way.  
-With a simple call to the explicit function name (no paranthesis), for example `mean` you can see the `environment: namespace:base` - which means the function is available after installing R.  
+In R it is relatively straightforward to create you own package. If accepted by the maintainers of CRAN, the repository for R packages, it will become available for anyone by a simple call to the `install.packages()` function! But you can also put your package or scripts on Git Hub, and make it available that way.  
+With a simple call to the explicit function name (no parenthesis), for example `mean` you can see the `environment: namespace:base` - which means the function is available after installing R.  
 Now try to make a call to `trapz`.  
 ```{r}
 
 ```
 
 Indeed, "object `trapz` not found".  
-If you do not want to code a trapezium based function to calculate the area under a curve yourself, you can google or search CRAN for a package that someone already wrote to do this. For example the `pracma`  package will do this for you. Install the package:
+If you do not want to code a trapezium based function to calculate the area under a curve yourself, you can Google or search CRAN for a package that someone already wrote to do this. For example the `pracma`  package will do this for you. Install the package:
 ```{r}
 #install.packages("pracma")
 ```
@@ -529,7 +529,7 @@ my_fun2(input = 1)
 
 ```
 So `my_fun` finds `a` in it's own environment, but `my_fun2` does not so it searches outside the function environment. 
-R is an interactive programming language, the danger with interactive programming is that you might have used certain variable names before and forgot about it. Wich can easily happen during extensive data analysis projects. This is why it is good practice not to clutter your R-memory with variables. Keep it clean by using functions. Observe how defining a variable in a function is not stored in global R memory:
+R is an interactive programming language, the danger with interactive programming is that you might have used certain variable names before and forgot about it. Which can easily happen during extensive data analysis projects. This is why it is good practice not to clutter your R-memory with variables. Keep it clean by using functions. Observe how defining a variable in a function is not stored in global R memory:
 
 ```{r}
 my_fun3 <- function( b0, b1, b2, x) {
@@ -561,7 +561,7 @@ By the way, you can see your R memory and the objects that live inside in the to
 
 ### functional programming: apply family  
 Functional programming: "Functions that do stuff or use other functions" is close enough for us.  
-Two inportant functions to this end are `lapply` and `sapply`. The difference is only in how they output the result. `lapply` outputs a list, and `sapply` tries to format the output - which often wont' be satisfactory - so try `sapply` first, then `lapply`.  
+Two important functions to this end are `lapply` and `sapply`. The difference is only in how they output the result. `lapply` outputs a list, and `sapply` tries to format the output - which often wont' be satisfactory - so try `sapply` first, then `lapply`.  
 To quickly check the classes of the columns of a data frame:
 ```{r}
 sapply(my_dataframe, class)
@@ -577,7 +577,7 @@ sapply(1:10, function(i) { i * 2})
 ```
 This might be a tricky one, but what happens is that sapply subsets the columns , list entries or entries in a vector, and feeds this 1 by 1 to the function. In the last example we simply defined our own function, and gave the fed-subsets a name: `i` - which we can then continue to use in our function.  
 
-* exercise: Define a function that adds a value to each subset of the vecter 1:10. Use `sapply` to do this. The value that you add should be an argument to the function    
+* exercise: Define a function that adds a value to each subset of the vector 1:10. Use `sapply` to do this. The value that you add should be an argument to the function    
 ```{r}
 
 ```
@@ -587,13 +587,13 @@ This might be a tricky one, but what happens is that sapply subsets the columns 
 
 ```
 
-Hopefully you noticed that if you want to specify some arguments to the function within an apply type of function, you need to explicitly name the subsets fed into the function by the apply function. You can do this by writing the whole funtion: `function(x) { function code or existing function name which used the x argument which contains the fed subset }` 
+Hopefully you noticed that if you want to specify some arguments to the function within an apply type of function, you need to explicitly name the subsets fed into the function by the apply function. You can do this by writing the whole function: `function(x) { function code or existing function name which used the x argument which contains the fed subset }` 
 
 
 
 ## dplyr & tidyr 
 
-The remainder of the course will be about data formatting, summarization and visualization. It is entirely possible to do these things using base R. However in recent years better alternatives have been developed. Now that the basic R syntax has been explained, it is time to introduce a more consistent and easier to read syntax created by Hadley Wickham in the form of key packages `dplyr`, `tidyr` and `ggplot2`. Most operations can be performed with `dplyr` and `tidyr`, and `ggplot2` can handle most visualizations. It is however still necessary to know the basic R syntax - especially for more compolicated and specific statistical analysis for which many methods exist. We will explain method (dispatch) in the visualization paragraph.         
+The remainder of the course will be about data formatting, summarization and visualization. It is entirely possible to do these things using base R. However in recent years better alternatives have been developed. Now that the basic R syntax has been explained, it is time to introduce a more consistent and easier to read syntax created by Hadley Wickham in the form of key packages `dplyr`, `tidyr` and `ggplot2`. Most operations can be performed with `dplyr` and `tidyr`, and `ggplot2` can handle most visualizations. It is however still necessary to know the basic R syntax - especially for more complicated and specific statistical analysis for which many methods exist. We will explain method (dispatch) in the visualization paragraph.         
 
 First install and load the packages:  
 ```{r}
@@ -604,7 +604,7 @@ library(ggplot2)
 
 ```
 
-## tidyr & dplyr syntax
+### tidyr & dplyr syntax
 
 Advantages:  
 ** Piping `%>%` more readable: data flow operator from left to right    
@@ -612,7 +612,7 @@ Advantages:
 ** Consistent language: `filter`, `select`, `mutate`,  `summarise` and `arrange`  
 ** Explicit function names (function names do what they say)  
 
-Overvieuw:  
+Overview:  
 row selection:  `filter(iris, Sepal.Length >6)`  
 column selection: `select(iris, Species : Petal.Length)`  
 Calculations: `mutate(iris, Petal.Ratio = Petal.Width / Petal.Length)`  
@@ -626,7 +626,7 @@ For example, using the dplyr syntax on `my_dataframe`:
 my_dataframe %>% filter( names %in% c("Margriet", "Elke") ) %>%
   select(names:hobbies) # select columns from names to hobbies
 ```
-To perform calculations on a dataframe and perform a statistical summary:  
+To perform calculations on a data frame and perform a statistical summary:  
 ```{r}
 my_dataframe %>% 
   mutate(nonsensicle_confidence_limits = 1.97*sd(fakeage)/sqrt(3)) %>%
@@ -635,7 +635,7 @@ my_dataframe %>%
     
 ```
 In the example above the `mutate` call calculates the confidence limits and adds it as a new column.  
-The `group_by` call is needed to group the dataframe by sex, so that R knows over what levels to summarise over in the next line. The `n = n()` gives us the number of rows summarised over, then two more calculations are performed as extra arguments to the `summarise` call; the sum of the age of the males/females, and the coefficient of variation.  
+The `group_by` call is needed to group the data frame by sex, so that R knows over what levels to summarize over in the next line. The `n = n()` gives us the number of rows summarized over, then two more calculations are performed as extra arguments to the `summarise` call; the sum of the age of the males/females, and the coefficient of variation.  
 
 
 * exercise: After observing the following code, rewrite it with pipes and `dplyr` syntax: 
@@ -662,7 +662,7 @@ Data reshaping, summarization and merging are fundamental data analysis operatio
 To explain these concepts and to demonstrate use-cases, we will perform a small case study.  
 Carefully run the lines and make sure to understand each part.  
 
-Observe the `iris` dataset:
+Observe the `iris` data set:
 ```{r}
 head(iris)
 ```
@@ -687,7 +687,7 @@ head(iris)
 iris %>% gather(key = variable, value = value , -Species)
 
 ```
-Basicly: `gather(data, key = "new name of combined columns", value = "new name of value column", -name of columns not to gather in key column)`
+Basically: `gather(data, key = "new name of combined columns", value = "new name of value column", -name of columns not to gather in key column)`
 Or you could specify the columns to gather: 
 ```{r}
 iris %>% gather(key = variable, value = value,
@@ -711,6 +711,36 @@ basically: `spread(longdata, key = name of column to spread, name of value colum
 
 
 * exercise: start with the iris data, go to long format with `gather` then back to the original format, but now without using the `id` column. You can reload/ clean the iris data with `data(iris)`  Did this work? Why (not)? What does the `id` represent?  
+```{r}
+
+```
+
+
+* exercise: Create a table that contains the max value of each measurement for each species from the `iris` data. What species has the plant with the largest petals and sepals?  
+```{r}
+
+```
+
+
+## data visualization  
+Most useRs tend to use the `ggplot2` package for data visualization. However before we delve into `ggplot2` we will explain the base r plotting system, because many useful methods exists for this system, especially in the context of statistical analysis like residual plots.  
+
+### base plotting methods  
+With base plotting you can modify the graphs in any little details you would like, this is however not very intuitive and requires quite a large amount of time to master. It is easier and quicker to do with the `theme_` system from the `ggplot2` package. In addition we can only recommend to modify little details using vector based images and import these into for example illustrator (since the university has an faculty wide license anyway).    
+
+
+
+
+### method dispatch  
+Method dispatch is everywhere in R. Functions call methods depending on the class of the input argument to the function. You can display the available methods for the plot function with `methods(plot)`. We will show you an example using the `plot` function, first we create three different object classes, then observe the behavior of the plot function:      
+
+```{r}
+dist/ hclust
+lm()
+data.frame
+```
+
+Also the type of data will change the way `plot` behaves. Compare for example nominal vs numerical data:  
 
 ```{r}
 
@@ -718,22 +748,6 @@ basically: `spread(longdata, key = name of column to spread, name of value colum
 
 
 
-* exercise
-
-
-
-
-###
-###
-###
-
-
-
-## data visualization  
-
-### base plotting methods  
-
-method dispatch   
 
 
 ### ggplot2   
