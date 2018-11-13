@@ -417,8 +417,10 @@ print(paste0("you have: ", my_money))
 
 There is a way to make the game better, by using a `while` loop. Here is an example:
 ```{r}
-while(my_money > 0 | my_money < 10 ) {
-  
+time_now <- Sys.time()
+while(Sys.time() < time_now + 10 ) {
+  print(Sys.time())
+  Sys.sleep(0.5)
 }
 ```
 
@@ -575,7 +577,7 @@ You can also use sapply instead of loops:
 ```{r}
 sapply(1:10, function(i) { i * 2})
 ```
-This might be a tricky one, but what happens is that sapply subsets the columns , list entries or entries in a vector, and feeds this 1 by 1 to the function. In the last example we simply defined our own function, and gave the fed-subsets a name: `i` - which we can then continue to use in our function.  
+This might be a tricky one to see at first, but what happens is that sapply subsets the columns , list entries or entries in a vector, and feeds this 1 by 1 to the function. In the last example we simply defined our own function, and gave the fed-subsets a name: `i` - which we can then continue to use in our function.  
 
 * exercise: Define a function that adds a value to each subset of the vector 1:10. Use `sapply` to do this. The value that you add should be an argument to the function    
 ```{r}
