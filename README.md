@@ -8,6 +8,13 @@
 
 ## R
 * [classes and variables](R/scripts/s01_operators_classes_and_variables.ipynb)
+* [data objects](R/scripts/s02_data_storage_objects.ipynb)
+* [control flow and repetition](R/scripts/s03_control_flow_and_repetition.ipynb)
+* [functions](R/scripts/s04_functions.ipynb)
+* [dplyr & tidyr](R/scripts/s05_dplyr_and_tidyr.ipynb)
+* [reshaping data](R/scripts/s06_data_reshaping_summarization_and_merging.ipynb)
+* [visualization](R/scripts/s07_data_visualization.ipynb)
+* [read and write](R/scripts/s08_read_and_write.ipynb)
 
 # Software
 
