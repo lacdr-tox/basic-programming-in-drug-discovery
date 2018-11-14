@@ -7,7 +7,7 @@
 * [Slides](python/slides/)
 
 ## R
-
+* [classes and variables](R/scripts/s01_operators_classes_and_variables.ipynb)
 
 # Software
 
