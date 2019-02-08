@@ -6,6 +6,18 @@
 * [Solutions](python/solutions/)
 * [Slides](python/slides/)
 
+#### Recommended resources for learning python on your own and/or refreshing your skills
+* [Interactive tutorial at DataCamp (only free parts)](https://www.datacamp.com/courses/intro-to-python-for-data-science)
+* [Interactive tutorial at Learn Python (skip advanced part)](https://www.learnpython.org)
+* [Python for Biologists: covers same topics that were covered in the Python basics part of the course LACDR course](https://pythonforbiologists.com/index.php/introduction-to-python-for-biologists/python-for-biologists-introduction/)
+#### Recommended resources for data analysis in Python
+* [Python data science handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
+* [Matplotlib tutorial](https://matplotlib.org/users/pyplot_tutorial.html)
+* [Seaborn tutorial](https://seaborn.pydata.org/tutorial.html)
+* [Jupyter notebook introduction](https://www.dataquest.io/blog/jupyter-notebook-tutorial/)
+* [Effective Pandas](https://github.com/TomAugspurger/effective-pandas)
+* [Cheat sheets (R and Python)](https://www.datacamp.com/community/data-science-cheatsheets)
+
 ## R
 * [classes and variables](R/scripts/s01_operators_classes_and_variables.ipynb)
 * [data objects](R/scripts/s02_data_storage_objects.ipynb)
